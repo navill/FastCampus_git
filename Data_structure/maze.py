@@ -32,10 +32,10 @@ class LinkedList:
 
 
 class Position:
-    def __init__(self, row, col, direc):
+    def __init__(self, row, col, dir):
         self.row = row
         self.col = col
-        self.direc = direc
+        self.dir = dir
 
 
 class MazeSolver:
@@ -47,7 +47,14 @@ class MazeSolver:
         self.EXIT_ROW = len(self.maze)
         self.EXIT_COL = len(self.maze[0])
 
-        # to do : 벽의 가장자리에 1로 된 벽 생성
+        for row in maze:
+            row.insert(0, 1)
+            row.append(1)
+
+        added_row = [1 for _ in range(self.EXIT_COL + 2)]
+        maze.insert(0, added_row)
+        maze.append(added_row)
+
         self.path = LinkedList()
 
     def get_path(self):
@@ -67,11 +74,34 @@ class MazeSolver:
         # 첫 시작 위치 스택에 push
         stack.push(Position(1, 1, 2))
 
-        while False:
-            while False:
-                pass
+        # stack is empty -> not found final destination
+        while not stack.empty() and not found:
+            # 경로를 찾기 전, pop에 의해 모든 스택이 비어있을 경우 갈곳이 있는지 검사
+            #
+            # stack pop -> row, col, dir : current path update
+            pos = stack.pop()
+            row = pos.row
+            col = pos.col
+            dir = pos.dir
+            # if search the every direction and not found, while is terminated
+            while dir < 8 and not found:
+                next_row = row + self.direction[dir][0]
+                next_col = col + self.direction[dir][1]
+                if next_row == self.EXIT_ROW and next_col == self.EXIT_COL:
+                    found = True
+                    stack.push(Position(row, col, dir))
+                    stack.push(Position(next_row, next_col, 0))
+
+                elif self.maze[next_row][next_col] == 0 and mark[next_row][next_col] == 0:
+                    mark[next_row][next_col] = 1
+                    stack.push(Position(row, col, dir))
+                    row = next_row
+                    col = next_col
+                    dir = 0
+                else:
+                    dir += 1
         if found:
-            while not stack.empty():
+            while not stack.empty():  # final destination
                 self.path.add(stack.pop())
         else:
             print('There is no path in this maze!')
