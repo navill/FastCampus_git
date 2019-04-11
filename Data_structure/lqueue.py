@@ -33,11 +33,22 @@ class LQueue:
 
     def enqueue(self, data):
         new_node = Node(data)
-        new_node.next = self.rear
-
+        if self.empty():  # 이 조건문이 없을 경우 데이터가 없을 때 에러 발생
+            self.front = new_node
+            self.rear = new_node
+            return
+        self.rear.next = new_node
+        self.rear = new_node
 
     def dequeue(self):
-        pass
+        if self.empty():
+            return
+
+        if self.front is self.rear:  # 이 조건문이 없을 경우, 데이터가 하나일 때 에러 발생
+            self.rear = self.rear.next
+        cur = self.front
+        self.front = self.front.next
+        return cur.data
 
     def peek(self):
         if self.empty():
