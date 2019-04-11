@@ -162,3 +162,5 @@ if __name__ == "__main__":
     maze_solver.get_path()
     maze_solver.print_path()
     maze_solver.show_path()
+
+print('a')
