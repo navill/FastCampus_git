@@ -43,7 +43,6 @@ class LQueue:
     def dequeue(self):
         if self.empty():
             return
-
         if self.front is self.rear:  # 이 조건문이 없을 경우, 데이터가 하나일 때 에러 발생
             self.rear = self.rear.next
         cur = self.front
