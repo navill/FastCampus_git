@@ -20,43 +20,40 @@ class Node:
         self.__next = n
 
 
-class LStack:
+class LQueue:
     def __init__(self):
-        self.top = None
+        self.front = None
+        self.rear = None
 
     def empty(self):
-        if self.top is None:
+        if self.front is None:
             return True
         else:
             return False
 
-    def push(self, data):
+    def enqueue(self, data):
         new_node = Node(data)
-        new_node.next = self.top
-        self.top = new_node
+        new_node.next = self.rear
 
-    def pop(self):
-        if self.empty():
-            return
 
-        cur = self.top
-        self.top = self.top.next
-        return cur.data
+    def dequeue(self):
+        pass
 
     def peek(self):
         if self.empty():
             return
-        return self.top.data
+
+        return self.front.data
 
 
 if __name__ == '__main__':
-    s = LStack()
+    q = LQueue()
 
-    s.push(1)
-    s.push(2)
-    s.push(3)
-    s.push(4)
-    s.push(5)
+    q.enqueue(1)
+    q.enqueue(2)
+    q.enqueue(3)
+    q.enqueue(4)
+    q.enqueue(5)
 
-    for i in range(5):
-        print(s.pop())
+    while not q.empty():
+        print(q.dequeue())
