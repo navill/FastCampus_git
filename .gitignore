@@ -128,3 +128,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 *.xml
+Data_structure/.idea/workspace.xml
