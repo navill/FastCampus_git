@@ -164,5 +164,4 @@ if __name__ == "__main__":
     maze_solver.show_path()
 
 
-print('git branch python_test2')
-print('git branch python_test2-1')
+print('git branch python_test')
