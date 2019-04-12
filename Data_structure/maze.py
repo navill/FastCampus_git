@@ -165,4 +165,13 @@ if __name__ == "__main__":
 
 print('a')
 print('b')
+<<<<<<< HEAD
 print('d')
+=======
+print('c')
+print('abc')
+print('make branch python_test2')
+print('feature/python_test')
+
+print('feature/python_temp')
+>>>>>>> release/v0.0.1.test_py
